@@ -31,4 +31,5 @@ Cypress.Commands.add('getByData', (selector) => {
 Cypress.Commands.add('login', (username, password) => {
     cy.getByData('credencialLogin').type(username);
     cy.getByData('senhaLogin').type(password);
+    cy.getByData('button-cadastrar').click();
 })

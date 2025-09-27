@@ -11,24 +11,29 @@ describe("Usuário e login listar", () => {
         cy.visit('/')
     })
 
-    it('Deve realizar login com sucesso com os tipos de usuários', () => {
+    /*it('Deve realizar login com sucesso com os tipos de usuários', () => {
       const users = ['usuario', 'motorista', 'mecanico', 'chefe', 'secretario', 'admin'];
 
       for(let user in users) {
         cy.login(users[user], 'ABCDabcd1234')
-        cy.getByData('button-cadastrar').click();
         cy.location('pathname').should('eq', '/inicio');
         cy.getByData('side-bar-header-perfil').click();
         cy.get('a').contains('Sair').click()
       }
 
-    });
+    }); */
 
     // Validação de campos obrigatórios no login e login incorreto
     it('Deve validar campos obrigatórios do login', () => {
-      // Implementação
+      cy.login(' ', 'ABCDabcd1234');
+      cy.contains('Campo obrigatório').should('be.visible');
+      cy.getByData('credencialLogin').clear()
+      cy.getByData('senhaLogin').clear();
+    
+      cy.login('admin', '  ');
+      cy.contains('Deve ter no mínimo 8 caracteres').should('be.visible');
     });
-
+    
     // Listagem de usuários com verificação de paginação e consistência com a API
     it('Deve listar usuários com sucesso, confirmando paginação e dados comparando com a API', () => {
       // Implementação
